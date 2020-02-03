@@ -1,18 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author sdegante
- */
 public class GUIFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form GUIFrame
-     */
     public GUIFrame() {
         initComponents();
         
@@ -21,7 +8,9 @@ public class GUIFrame extends javax.swing.JFrame {
         ((javax.swing.JSpinner.DefaultEditor) spBuffer.getEditor()).getTextField().setEditable(false);
         ((javax.swing.JSpinner.DefaultEditor) spMin.getEditor()).getTextField().setEditable(false);
         ((javax.swing.JSpinner.DefaultEditor) spMax.getEditor()).getTextField().setEditable(false);
+        
         txtCompletedTasks.setEditable(false);
+        
     }
 
     /**
@@ -59,7 +48,7 @@ public class GUIFrame extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jProgressBar1 = new javax.swing.JProgressBar();
         txtCompletedTasks = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        goButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -252,12 +241,12 @@ public class GUIFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Procesos", jPanel3);
 
-        jButton1.setFont(new java.awt.Font("Courier New", 1, 24)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 102, 51));
-        jButton1.setText("INICIAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        goButton.setFont(new java.awt.Font("Courier New", 1, 24)); // NOI18N
+        goButton.setForeground(new java.awt.Color(0, 102, 51));
+        goButton.setText("INICIAR");
+        goButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                goButtonActionPerformed(evt);
             }
         });
 
@@ -271,7 +260,7 @@ public class GUIFrame extends javax.swing.JFrame {
                     .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(goButton, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -280,20 +269,30 @@ public class GUIFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jTabbedPane1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(goButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void goButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        
+        if(goButton.getText().equals("INICIAR"))
+            goButton.setText("PARAR");
+        else
+            goButton.setText("INICIAR");
+        
+        try{
+            int prodTime = (Integer)spProdTime.getValue();
+            int consTime = (Integer)spConsTime.getValue();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_goButtonActionPerformed
+ 
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -327,7 +326,7 @@ public class GUIFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton goButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
