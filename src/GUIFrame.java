@@ -17,7 +17,7 @@ public class GUIFrame extends javax.swing.JFrame {
         initComponents();
         
         ((javax.swing.JSpinner.DefaultEditor) spProducers.getEditor()).getTextField().setEditable(false);
-        ((javax.swing.JSpinner.DefaultEditor) spBuffer.getEditor()).getTextField().setEditable(false);
+        ((javax.swing.JSpinner.DefaultEditor) spConsumers.getEditor()).getTextField().setEditable(false);
         ((javax.swing.JSpinner.DefaultEditor) spBuffer.getEditor()).getTextField().setEditable(false);
         ((javax.swing.JSpinner.DefaultEditor) spMin.getEditor()).getTextField().setEditable(false);
         ((javax.swing.JSpinner.DefaultEditor) spMax.getEditor()).getTextField().setEditable(false);
@@ -47,7 +47,7 @@ public class GUIFrame extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         spProdTime = new javax.swing.JSpinner();
         spConsTime = new javax.swing.JSpinner();
-        spConsumers1 = new javax.swing.JSpinner();
+        spConsumers = new javax.swing.JSpinner();
         spMin = new javax.swing.JSpinner();
         jSeparator1 = new javax.swing.JSeparator();
         jPanel3 = new javax.swing.JPanel();
@@ -86,7 +86,7 @@ public class GUIFrame extends javax.swing.JFrame {
 
         spConsTime.setModel(new javax.swing.SpinnerNumberModel(0, 0, 10000, 1));
 
-        spConsumers1.setModel(new javax.swing.SpinnerNumberModel(1, 1, 10, 1));
+        spConsumers.setModel(new javax.swing.SpinnerNumberModel(1, 1, 10, 1));
 
         spMin.setModel(new javax.swing.SpinnerNumberModel(0, 0, 9, 1));
 
@@ -99,20 +99,16 @@ public class GUIFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(67, 67, 67))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(39, 39, 39)))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(39, 39, 39)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(spProducers)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
-                                    .addComponent(spConsumers1, javax.swing.GroupLayout.Alignment.TRAILING))
+                                    .addComponent(spConsumers, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -147,7 +143,7 @@ public class GUIFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(spConsTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(spConsumers1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(spConsumers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -347,7 +343,7 @@ public class GUIFrame extends javax.swing.JFrame {
     private javax.swing.JTable jTable2;
     private javax.swing.JSpinner spBuffer;
     private javax.swing.JSpinner spConsTime;
-    private javax.swing.JSpinner spConsumers1;
+    private javax.swing.JSpinner spConsumers;
     private javax.swing.JSpinner spMax;
     private javax.swing.JSpinner spMin;
     private javax.swing.JSpinner spProdTime;
