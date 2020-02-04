@@ -288,7 +288,7 @@ public class GUIFrame extends javax.swing.JFrame {
             goButton.setText("PARAR");
             
             producer.setSleep((Integer)spProdTime.getValue());
-            producer.setSleep((Integer)spConsTime.getValue());
+            consumer.setSleep((Integer)spConsTime.getValue());
             
             producer.setRange((Integer)spMin.getValue(), (Integer)spMax.getValue());
             
