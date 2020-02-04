@@ -71,9 +71,9 @@ public class GUIFrame extends javax.swing.JFrame {
 
         jLabel4.setText("Cantidad");
 
-        spProdTime.setModel(new javax.swing.SpinnerNumberModel(0, 0, 10000, 1));
+        spProdTime.setModel(new javax.swing.SpinnerNumberModel(1000, 0, 10000, 1));
 
-        spConsTime.setModel(new javax.swing.SpinnerNumberModel(0, 0, 10000, 1));
+        spConsTime.setModel(new javax.swing.SpinnerNumberModel(1000, 0, 10000, 1));
 
         spConsumers.setModel(new javax.swing.SpinnerNumberModel(1, 1, 10, 1));
 
@@ -279,17 +279,36 @@ public class GUIFrame extends javax.swing.JFrame {
     private void goButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goButtonActionPerformed
         // TODO add your handling code here:
         
-        if(goButton.getText().equals("INICIAR"))
-            goButton.setText("PARAR");
-        else
-            goButton.setText("INICIAR");
+        Buffer buffer = new Buffer();
+        Producer producer = new Producer(buffer);
+        Consumer consumer = new Consumer(buffer);
         
-        try{
-            int prodTime = (Integer)spProdTime.getValue();
-            int consTime = (Integer)spConsTime.getValue();
-        } catch (Exception e) {
-            System.out.println(e);
+        if(goButton.getText().equals("INICIAR")){
+            
+            goButton.setText("PARAR");
+            
+            producer.setSleep((Integer)spProdTime.getValue());
+            producer.setSleep((Integer)spConsTime.getValue());
+            
+            producer.setRange((Integer)spMin.getValue(), (Integer)spMax.getValue());
+            
+            buffer.setLength((Integer)spBuffer.getValue());
+            
+            producer.start();
+            consumer.start();
+            
+            
+        } else {
+            
+            goButton.setText("INICIAR");
+            
+            producer.stawp();
+            consumer.stawp();
+            
         }
+       
+       
+        
     }//GEN-LAST:event_goButtonActionPerformed
  
 
