@@ -280,30 +280,50 @@ public class GUIFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         Buffer buffer = new Buffer();
-        Producer producer = new Producer(buffer);
-        Consumer consumer = new Consumer(buffer);
+        
+        int nProducers = (Integer)spProducers.getValue();
+        int nConsumers = (Integer)spConsumers.getValue();
+        
+        Producer producers[] = new Producer[nProducers];
+        Consumer consumers[] = new Consumer[nConsumers];
+        
+//        Producer producer = new Producer(buffer);
+//        Consumer consumer = new Consumer(buffer);
         
         if(goButton.getText().equals("INICIAR")){
             
             goButton.setText("PARAR");
-            
-            producer.setSleep((Integer)spProdTime.getValue());
-            consumer.setSleep((Integer)spConsTime.getValue());
-            
-            producer.setRange((Integer)spMin.getValue(), (Integer)spMax.getValue());
-            
             buffer.setLength((Integer)spBuffer.getValue());
             
-            producer.start();
-            consumer.start();
+            for(int i=0; i<nProducers; i++){
+                producers[i] = new Producer(buffer);
+                
+                producers[i].setSleep((Integer)spProdTime.getValue());
+                producers[i].setRange((Integer)spMin.getValue(), (Integer)spMax.getValue());
+                
+                producers[i].start();
+            }
+            
+            for(int i=0; i<nConsumers; i++){
+                consumers[i] = new Consumer(buffer);
+                
+                consumers[i].setSleep((Integer)spConsTime.getValue());
+            
+                consumers[i].start();
+            }
+            
+            
             
             
         } else {
             
             goButton.setText("INICIAR");
             
-            producer.stawp();
-            consumer.stawp();
+            for(int i=0; i<nProducers; i++)
+                producers[i].stawp();
+            
+            for(int i=0; i<nConsumers; i++)
+                consumers[i].stawp();
             
         }
        
