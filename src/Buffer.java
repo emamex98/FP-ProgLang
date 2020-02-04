@@ -19,7 +19,7 @@ public class Buffer {
         
         if(this.buffer.isEmpty()) {
             try {
-                wait(1000);
+                wait();
             } catch (InterruptedException ex) {
                 Logger.getLogger(Buffer.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -35,7 +35,7 @@ public class Buffer {
         
         if(this.buffer.size() == this.length) {
             try {
-                wait(1000);
+                wait();
             } catch (InterruptedException ex) {
                 Logger.getLogger(Buffer.class.getName()).log(Level.SEVERE, null, ex);
             }

@@ -42,8 +42,11 @@ public class Producer extends Thread {
                     + " " + (random.nextInt((this.maxInt - this.minInt) + 1) + this.minInt)
                     + ")";
             
-            this.buffer.produce(product);
-            Buffer.print("Producer produced: " + product);
+            if(!(product.charAt(1) == '/' && product.charAt(5) == '0')){
+                this.buffer.produce(product);
+                Buffer.print("Producer produced: " + product);
+            }
+                
             
             try {
                 Thread.sleep(this.sleep);
