@@ -26,9 +26,10 @@ public class Consumer extends Thread {
         System.out.println("Running Consumer...");
         
         while(active) {
-            String product = this.buffer.consume();
-            
-            Buffer.print("Consumer consumed: " + product);
+            try{
+                String product = this.buffer.consume();
+                Buffer.print("Consumer consumed: " + product);
+            }catch(IndexOutOfBoundsException error){}
             
             try {
                 Thread.sleep(this.sleep);

@@ -1,5 +1,7 @@
 public class GUIFrame extends javax.swing.JFrame {
-
+    Producer producers[];
+    Consumer consumers[];
+    
     public GUIFrame() {
         initComponents();
         
@@ -284,13 +286,14 @@ public class GUIFrame extends javax.swing.JFrame {
         int nProducers = (Integer)spProducers.getValue();
         int nConsumers = (Integer)spConsumers.getValue();
         
-        Producer producers[] = new Producer[nProducers];
-        Consumer consumers[] = new Consumer[nConsumers];
+        
         
 //        Producer producer = new Producer(buffer);
 //        Consumer consumer = new Consumer(buffer);
         
         if(goButton.getText().equals("INICIAR")){
+            producers = new Producer[nProducers];
+            consumers = new Consumer[nConsumers];
             
             goButton.setText("PARAR");
             buffer.setLength((Integer)spBuffer.getValue());
@@ -319,11 +322,11 @@ public class GUIFrame extends javax.swing.JFrame {
             
             goButton.setText("INICIAR");
             
-            for(int i=0; i<nProducers; i++)
-                producers[i].stawp();
-            
             for(int i=0; i<nConsumers; i++)
                 consumers[i].stawp();
+            
+            for(int i=0; i<nProducers; i++)
+                producers[i].stawp();
             
         }
        
