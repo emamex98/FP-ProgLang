@@ -38,8 +38,8 @@ public class Producer extends Thread {
             
             String product = "("
                     + operadores[random.nextInt(4)]
-                    + " " + random.nextInt(10)
-                    + " " + random.nextInt(10)
+                    + " " + (random.nextInt((this.maxInt - this.minInt) + 1) + this.minInt)
+                    + " " + (random.nextInt((this.maxInt - this.minInt) + 1) + this.minInt)
                     + ")";
             
             this.buffer.produce(product);
