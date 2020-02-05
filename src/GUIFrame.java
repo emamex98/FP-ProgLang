@@ -295,7 +295,7 @@ public class GUIFrame extends javax.swing.JFrame {
             buffer.setLength((Integer)spBuffer.getValue());
             
             for(int i=0; i<nProducers; i++){
-                producers[i] = new Producer(buffer);
+                producers[i] = new Producer(buffer,i);
                 
                 producers[i].setSleep((Integer)spProdTime.getValue());
                 
@@ -310,7 +310,7 @@ public class GUIFrame extends javax.swing.JFrame {
             }
             
             for(int i=0; i<nConsumers; i++){
-                consumers[i] = new Consumer(buffer);
+                consumers[i] = new Consumer(buffer,i);
                 
                 consumers[i].setSleep((Integer)spConsTime.getValue());
             

@@ -8,11 +8,12 @@ public class Consumer extends Thread {
     
     private static boolean active;
     private static int sleep;
+    private int idC;
     
-    Consumer(Buffer buffer) {
+    Consumer(Buffer buffer, int idC) {
         this.buffer = buffer;
         this.active = true;
-        
+        this.idC = idC;
         // Defaults
         this.sleep = 1000;
     }
@@ -28,7 +29,25 @@ public class Consumer extends Thread {
         while(active) {
             try{
                 String product = this.buffer.consume();
-                Buffer.print("Consumer consumed: " + product);
+                String[] splited_p = product.split("\\$");
+                float result = 0;
+            //System.out.println("Consumer consumed: " + product);
+                switch(splited_p[1].charAt(1)){
+                case '+':
+                    result = Character.getNumericValue(splited_p[1].charAt(3))+Character.getNumericValue(splited_p[1].charAt(5));
+                    break;
+                case '-':
+                    result = Character.getNumericValue(splited_p[1].charAt(3))- Character.getNumericValue(splited_p[1].charAt(5));
+                    break;
+                case '/':
+                    result = (float) Character.getNumericValue(splited_p[1].charAt(3))/Character.getNumericValue(splited_p[1].charAt(5));
+                    break;
+                case '*':
+                    result = Character.getNumericValue(splited_p[1].charAt(3))*Character.getNumericValue(splited_p[1].charAt(5));
+                    break;
+            }
+                
+                Buffer.print("Consumer consumed: " +splited_p[0]+" "+splited_p[1]+" : "+result);
             } catch(IndexOutOfBoundsException error) {}
             
             try {
