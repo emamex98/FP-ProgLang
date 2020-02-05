@@ -287,10 +287,6 @@ public class GUIFrame extends javax.swing.JFrame {
         int nConsumers = (Integer)spConsumers.getValue();
         
         
-        
-//        Producer producer = new Producer(buffer);
-//        Consumer consumer = new Consumer(buffer);
-        
         if(goButton.getText().equals("INICIAR")){
             producers = new Producer[nProducers];
             consumers = new Consumer[nConsumers];
@@ -302,7 +298,13 @@ public class GUIFrame extends javax.swing.JFrame {
                 producers[i] = new Producer(buffer);
                 
                 producers[i].setSleep((Integer)spProdTime.getValue());
-                producers[i].setRange((Integer)spMin.getValue(), (Integer)spMax.getValue());
+                
+                if((Integer)spMin.getValue() <= (Integer)spMax.getValue()){
+                    producers[i].setRange((Integer)spMin.getValue(), (Integer)spMax.getValue());
+                } else {
+                    spMax.setValue((Integer)spMin.getValue());
+                    producers[i].setRange((Integer)spMin.getValue(), (Integer)spMin.getValue());
+                }
                 
                 producers[i].start();
             }
@@ -315,7 +317,7 @@ public class GUIFrame extends javax.swing.JFrame {
                 consumers[i].start();
             }
             
-            
+            enableInterface(false);
             
             
         } else {
@@ -327,6 +329,9 @@ public class GUIFrame extends javax.swing.JFrame {
             
             for(int i=0; i<nProducers; i++)
                 producers[i].stawp();
+            
+            enableInterface(true);
+            
             
         }
        
@@ -366,7 +371,17 @@ public class GUIFrame extends javax.swing.JFrame {
             }
         });
     }
-
+    
+    public void enableInterface(boolean isEnabled){
+        spProducers.setEnabled(isEnabled);
+        spConsumers.setEnabled(isEnabled);
+        spProdTime.setEnabled(isEnabled);
+        spConsTime.setEnabled(isEnabled);
+        spMax.setEnabled(isEnabled);
+        spMin.setEnabled(isEnabled);
+        spBuffer.setEnabled(isEnabled);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton goButton;
     private javax.swing.JLabel jLabel1;

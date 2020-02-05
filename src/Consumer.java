@@ -29,7 +29,7 @@ public class Consumer extends Thread {
             try{
                 String product = this.buffer.consume();
                 Buffer.print("Consumer consumed: " + product);
-            }catch(IndexOutOfBoundsException error){}
+            } catch(IndexOutOfBoundsException error) {}
             
             try {
                 Thread.sleep(this.sleep);
