@@ -6,10 +6,11 @@ public class Buffer {
     
     private ArrayList<String> buffer;
     private static int length;
+    private int id;
     
     Buffer() {
         this.buffer = new ArrayList<String>();
-        
+        this.id = 0;
         // Defaults
         this.length = 1;
     }
@@ -40,8 +41,8 @@ public class Buffer {
                 Logger.getLogger(Buffer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
-        this.buffer.add(product);
+        this.id++;
+        this.buffer.add(this.id+"$"+product);
         notify();
     }
     

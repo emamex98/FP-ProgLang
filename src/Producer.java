@@ -11,11 +11,12 @@ public class Producer extends Thread {
     private static int sleep;
     private static int minInt;
     private static int maxInt;
+    private int idP;
     
-    Producer(Buffer buffer) {
+    Producer(Buffer buffer, int idP) {
         this.buffer = buffer;
         this.active = true;
-        
+        this.idP = idP;
         // Defaults
         this.sleep = 1000;
         this.minInt = 0;
@@ -25,6 +26,7 @@ public class Producer extends Thread {
     public void stawp(){
         this.active = false;
     }
+    
     
     @Override
     public void run() {
