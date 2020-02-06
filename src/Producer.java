@@ -45,10 +45,10 @@ public class Producer extends Thread {
                     + ")";
             
             if(!(product.charAt(1) == '/' && product.charAt(5) == '0')){
-                this.buffer.produce(product);
+                this.buffer.produce(product, this.idP);
                 Buffer.print("Producer produced: " + product);
             } else {
-                // KEVIN, REVISAR ESTO!!!!
+                this.buffer.produce(product, this.idP);
                 Buffer.print("Producer produced: " + product);
                 System.out.println("Error: División entre cero, operación indefinida.");
             }

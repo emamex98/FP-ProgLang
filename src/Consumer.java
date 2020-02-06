@@ -31,7 +31,8 @@ public class Consumer extends Thread {
                 String product = this.buffer.consume();
                 String[] splited_p = product.split("\\$");
                 float result = 0;
-            //System.out.println("Consumer consumed: " + product);
+                
+
                 switch(splited_p[1].charAt(1)){
                 case '+':
                     result = Character.getNumericValue(splited_p[1].charAt(3))+Character.getNumericValue(splited_p[1].charAt(5));
@@ -45,9 +46,11 @@ public class Consumer extends Thread {
                 case '*':
                     result = Character.getNumericValue(splited_p[1].charAt(3))*Character.getNumericValue(splited_p[1].charAt(5));
                     break;
-            }
-                
+                }
+                               
                 Buffer.print("Consumer consumed: " +splited_p[0]+" "+splited_p[1]+" : "+result);
+                Buffer.insertRowC(splited_p[0],this.idC,splited_p[1],result);
+
             } catch(IndexOutOfBoundsException error) {}
             
             try {
