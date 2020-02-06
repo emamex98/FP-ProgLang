@@ -49,6 +49,7 @@ public class Consumer extends Thread {
                 
                 Buffer.print("Consumer consumed: " +splited_p[0]+" "+splited_p[1]+" : "+result);
                 Buffer.insertRowC(splited_p[0],this.idC,splited_p[1],result);
+                //Buffer.delRowP(this.buffer.getSize());
             } catch(IndexOutOfBoundsException error) {}
             
             try {

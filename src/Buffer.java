@@ -38,6 +38,7 @@ public class Buffer {
         }
         
         product = this.buffer.remove(0);
+        Buffer.delRowP(this.buffer.size());
         notify();
         
         return product;
@@ -45,7 +46,7 @@ public class Buffer {
     
     synchronized void produce(String product, int idP) {
         
-        if(this.buffer.size() == this.length) {
+        if(this.buffer.size() >= this.length) {
             try {
                 wait();
             } catch (InterruptedException ex) {
@@ -76,6 +77,11 @@ public class Buffer {
         Buffer.tablitaP.setModel(modelP);
     }
     
+    synchronized static void delRowP(int index){
+        Buffer.modelP.removeRow(index);
+        Buffer.tablitaP.setModel(modelP);
+    }
+    
     public void clearModelC(){
         this.modelC.setRowCount(0);
         Buffer.tablitaC.setModel(modelC);
@@ -90,4 +96,7 @@ public class Buffer {
         this.length = length;
     }
     
+    public int getSize(){
+        return this.buffer.size();
+    }
 }
