@@ -1,5 +1,7 @@
 public class GUIFrame extends javax.swing.JFrame {
-
+    Producer producers[];
+    Consumer consumers[];
+    
     public GUIFrame() {
         initComponents();
         
@@ -71,9 +73,9 @@ public class GUIFrame extends javax.swing.JFrame {
 
         jLabel4.setText("Cantidad");
 
-        spProdTime.setModel(new javax.swing.SpinnerNumberModel(0, 0, 10000, 1));
+        spProdTime.setModel(new javax.swing.SpinnerNumberModel(1000, 0, 10000, 1));
 
-        spConsTime.setModel(new javax.swing.SpinnerNumberModel(0, 0, 10000, 1));
+        spConsTime.setModel(new javax.swing.SpinnerNumberModel(1000, 0, 10000, 1));
 
         spConsumers.setModel(new javax.swing.SpinnerNumberModel(1, 1, 10, 1));
 
@@ -279,17 +281,62 @@ public class GUIFrame extends javax.swing.JFrame {
     private void goButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goButtonActionPerformed
         // TODO add your handling code here:
         
-        if(goButton.getText().equals("INICIAR"))
-            goButton.setText("PARAR");
-        else
-            goButton.setText("INICIAR");
+        Buffer buffer = new Buffer();
         
-        try{
-            int prodTime = (Integer)spProdTime.getValue();
-            int consTime = (Integer)spConsTime.getValue();
-        } catch (Exception e) {
-            System.out.println(e);
+        int nProducers = (Integer)spProducers.getValue();
+        int nConsumers = (Integer)spConsumers.getValue();
+        
+        
+        if(goButton.getText().equals("INICIAR")){
+            producers = new Producer[nProducers];
+            consumers = new Consumer[nConsumers];
+            
+            goButton.setText("PARAR");
+            buffer.setLength((Integer)spBuffer.getValue());
+            
+            for(int i=0; i<nProducers; i++){
+                producers[i] = new Producer(buffer,i);
+                
+                producers[i].setSleep((Integer)spProdTime.getValue());
+                
+                if((Integer)spMin.getValue() <= (Integer)spMax.getValue()){
+                    producers[i].setRange((Integer)spMin.getValue(), (Integer)spMax.getValue());
+                } else {
+                    spMax.setValue((Integer)spMin.getValue());
+                    producers[i].setRange((Integer)spMin.getValue(), (Integer)spMin.getValue());
+                }
+                
+                producers[i].start();
+            }
+            
+            for(int i=0; i<nConsumers; i++){
+                consumers[i] = new Consumer(buffer,i);
+                
+                consumers[i].setSleep((Integer)spConsTime.getValue());
+            
+                consumers[i].start();
+            }
+            
+            enableInterface(false);
+            
+            
+        } else {
+            
+            goButton.setText("INICIAR");
+            
+            for(int i=0; i<nConsumers; i++)
+                consumers[i].stawp();
+            
+            for(int i=0; i<nProducers; i++)
+                producers[i].stawp();
+            
+            enableInterface(true);
+            
+            
         }
+       
+       
+        
     }//GEN-LAST:event_goButtonActionPerformed
  
 
@@ -324,7 +371,17 @@ public class GUIFrame extends javax.swing.JFrame {
             }
         });
     }
-
+    
+    public void enableInterface(boolean isEnabled){
+        spProducers.setEnabled(isEnabled);
+        spConsumers.setEnabled(isEnabled);
+        spProdTime.setEnabled(isEnabled);
+        spConsTime.setEnabled(isEnabled);
+        spMax.setEnabled(isEnabled);
+        spMin.setEnabled(isEnabled);
+        spBuffer.setEnabled(isEnabled);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton goButton;
     private javax.swing.JLabel jLabel1;
