@@ -1,3 +1,7 @@
+
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 public class GUIFrame extends javax.swing.JFrame {
     Producer producers[];
     Consumer consumers[];
@@ -43,9 +47,9 @@ public class GUIFrame extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableP = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTableC = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jProgressBar1 = new javax.swing.JProgressBar();
@@ -168,7 +172,7 @@ public class GUIFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Configuración", jPanel2);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -179,20 +183,20 @@ public class GUIFrame extends javax.swing.JFrame {
                 "ID Tarea", "Productor", "Tarea"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableP);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTableC.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "ID Tarea", "Consumidor", "Resultado"
+                "ID Tarea", "ID Cons", "Operacion", "Resultado"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(jTableC);
 
         jLabel7.setText("Tareas por hacer");
 
@@ -202,7 +206,6 @@ public class GUIFrame extends javax.swing.JFrame {
 
         txtCompletedTasks.setEditable(false);
         txtCompletedTasks.setText("0");
-        txtCompletedTasks.setDragEnabled(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -280,14 +283,15 @@ public class GUIFrame extends javax.swing.JFrame {
 
     private void goButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goButtonActionPerformed
         // TODO add your handling code here:
-        
-        Buffer buffer = new Buffer();
+        Buffer buffer = new Buffer(jTableP, jTableC, txtCompletedTasks);
         
         int nProducers = (Integer)spProducers.getValue();
         int nConsumers = (Integer)spConsumers.getValue();
         
         
         if(goButton.getText().equals("INICIAR")){
+            buffer.clearModelC();
+            buffer.clearModelP();
             producers = new Producer[nProducers];
             consumers = new Consumer[nConsumers];
             
@@ -400,8 +404,8 @@ public class GUIFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTableC;
+    private javax.swing.JTable jTableP;
     private javax.swing.JSpinner spBuffer;
     private javax.swing.JSpinner spConsTime;
     private javax.swing.JSpinner spConsumers;
