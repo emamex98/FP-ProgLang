@@ -48,7 +48,6 @@ public class Producer extends Thread {
                 this.buffer.produce(product, this.idP);
                 Buffer.print("Producer produced: " + product);
             } else {
-                // KEVIN, REVISAR ESTO!!!!
                 Buffer.print("Producer produced: " + product);
                 System.out.println("Error: División entre cero, operación indefinida.");
             }

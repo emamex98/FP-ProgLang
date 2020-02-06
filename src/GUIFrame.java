@@ -374,6 +374,9 @@ public class GUIFrame extends javax.swing.JFrame {
                 new GUIFrame().setVisible(true);
             }
         });
+        
+        Handler globalExceptionHandler = new Handler();
+        Thread.setDefaultUncaughtExceptionHandler(globalExceptionHandler);
     }
     
     public void enableInterface(boolean isEnabled){
