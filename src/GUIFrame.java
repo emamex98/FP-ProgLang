@@ -52,7 +52,7 @@ public class GUIFrame extends javax.swing.JFrame {
         jTableC = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jProgressBar1 = new javax.swing.JProgressBar();
+        progressTasks = new javax.swing.JProgressBar();
         txtCompletedTasks = new javax.swing.JTextField();
         goButton = new javax.swing.JButton();
 
@@ -202,8 +202,6 @@ public class GUIFrame extends javax.swing.JFrame {
 
         jLabel8.setText("Tareas realizadas");
 
-        jProgressBar1.setValue(50);
-
         txtCompletedTasks.setEditable(false);
         txtCompletedTasks.setText("0");
 
@@ -216,7 +214,7 @@ public class GUIFrame extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(progressTasks, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -239,7 +237,7 @@ public class GUIFrame extends javax.swing.JFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(progressTasks, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCompletedTasks, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
@@ -283,7 +281,7 @@ public class GUIFrame extends javax.swing.JFrame {
 
     private void goButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goButtonActionPerformed
         // TODO add your handling code here:
-        Buffer buffer = new Buffer(jTableP, jTableC, txtCompletedTasks);
+        Buffer buffer = new Buffer(jTableP, jTableC, txtCompletedTasks, progressTasks);
         
         int nProducers = (Integer)spProducers.getValue();
         int nConsumers = (Integer)spConsumers.getValue();
@@ -296,6 +294,7 @@ public class GUIFrame extends javax.swing.JFrame {
             consumers = new Consumer[nConsumers];
             
             goButton.setText("PARAR");
+            progressTasks.setValue(0);
             buffer.setLength((Integer)spBuffer.getValue());
             
             for(int i=0; i<nProducers; i++){
@@ -327,6 +326,7 @@ public class GUIFrame extends javax.swing.JFrame {
         } else {
             
             goButton.setText("INICIAR");
+            
             
             for(int i=0; i<nConsumers; i++)
                 consumers[i].stawp();
@@ -399,13 +399,13 @@ public class GUIFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTableC;
     private javax.swing.JTable jTableP;
+    private javax.swing.JProgressBar progressTasks;
     private javax.swing.JSpinner spBuffer;
     private javax.swing.JSpinner spConsTime;
     private javax.swing.JSpinner spConsumers;
