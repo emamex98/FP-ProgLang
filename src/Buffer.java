@@ -34,13 +34,10 @@ public class Buffer {
     synchronized String consume() {
         String product = null;
         
-        System.out.println("Consume - Size: " + this.buffer.size());
-        System.out.println("Consume - Length: " + this.length);
-        
         if(this.buffer.isEmpty()) {
             try {
-                System.out.println("Cons Waiting");
-                wait();
+                if(this.length > 1)
+                    wait();
             } catch (InterruptedException ex) {
                 Logger.getLogger(Buffer.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -55,13 +52,10 @@ public class Buffer {
     
     synchronized void produce(String product, int idP) {
         
-        System.out.println("Produce - Size: " + this.buffer.size());
-        System.out.println("Produce - Length: " + this.length);
-        
         if(this.buffer.size() >= this.length) {
             try {
-                System.out.println("Prod Waiting");
-                wait();
+                if(this.length > 1)
+                    wait();
             } catch (InterruptedException ex) {
                 Logger.getLogger(Buffer.class.getName()).log(Level.SEVERE, null, ex);
             }
